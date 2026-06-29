@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "TruthLens",
+  "version": "1.0.0",
+  "description": "Verify claims, images, and videos while you browse the web.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "sidePanel",
+    "scripting",
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "282765915929-k75kq784go0o5udbef2i8madcf0k9jq4.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile"
+    ]
+  },
+  "optional_host_permissions": [
+    "https://*.x.com/*",
+    "https://*.twitter.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "options_page": "options/options.html",
+  "action": {
+    "default_title": "Open TruthLens"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://x.com/*"
+      ],
+      "js": ["adapters/x_adapter.js", "content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  }
+}

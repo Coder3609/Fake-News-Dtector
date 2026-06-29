@@ -1,0 +1,73 @@
+/* TruthLens Injected Button Styles */
+
+.truthlens-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.1s;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* X action bar integration */
+div[role="group"] .truthlens-btn {
+  color: #71767b; /* Matches X default icon color */
+  min-width: 32px;
+  min-height: 32px;
+}
+
+div[role="group"] .truthlens-btn:hover {
+  background-color: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  transform: scale(1.05);
+}
+
+.tl-btn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tl-icon-small {
+  font-weight: 700;
+  font-size: 11px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 2px 4px;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 4px;
+}
+
+/* News Headline Integration */
+.truthlens-btn.news-btn {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 20px;
+  padding: 6px 14px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  color: #f8fafc;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.05);
+}
+
+.truthlens-btn.news-btn:hover {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+  border-color: #38bdf8;
+  transform: translateY(-1px);
+}
+
+.truthlens-btn.news-btn .tl-btn-text {
+  margin-left: 6px;
+  font-size: 12px;
+  color: #38bdf8;
+}

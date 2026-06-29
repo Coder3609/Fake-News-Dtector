@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruthLens Sidepanel</title>
+  <link rel="stylesheet" href="sidepanel.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <span class="logo-symbol">TL</span>
+      <span class="logo-text">TruthLens</span>
+    </div>
+    <button class="btn-icon" id="btn-reset" title="Reset panel">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+        <path d="M21 3v5h-5"/>
+        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+        <path d="M3 21v-5h5"/>
+      </svg>
+    </button>
+  </header>
+
+  <main class="panel-content">
+    <!-- State 1: Default Idle State -->
+    <div class="state-container active" id="state-idle">
+      <div class="idle-graphic">🎯</div>
+      <h3>Click to Verify</h3>
+      <p class="idle-text">
+        Browse normal social media posts or news articles. Click the elegant <strong>TruthLens icon</strong> next to claims, images, or videos to start verification.
+      </p>
+    </div>
+
+    <!-- State 2: Loading & Progress State -->
+    <div class="state-container" id="state-loading">
+      <div class="pulser-container">
+        <div class="pulser"></div>
+        <div class="pulser-ring"></div>
+      </div>
+      <h3 id="loading-header">Analyzing Content...</h3>
+      
+      <!-- Granular progress tracker -->
+      <div class="progress-tracker" id="progress-list">
+        <div class="step-item" id="step-validate">
+          <span class="step-dot"></span>
+          <span class="step-label">Validating request...</span>
+        </div>
+        <div class="step-item" id="step-extract">
+          <span class="step-dot"></span>
+          <span class="step-label">Extracting content...</span>
+        </div>
+        <div class="step-item" id="step-fingerprint">
+          <span class="step-dot"></span>
+          <span class="step-label">Checking cache signature...</span>
+        </div>
+        <div class="step-item" id="step-search">
+          <span class="step-dot"></span>
+          <span class="step-label">Retrieving evidence from Tavily...</span>
+        </div>
+        <div class="step-item" id="step-reason">
+          <span class="step-dot"></span>
+          <span class="step-label">Reasoning with Gemini models...</span>
+        </div>
+        <div class="step-item" id="step-trust">
+          <span class="step-dot"></span>
+          <span class="step-label">Calculating source trust tiers...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- State 3: Results View -->
+    <div class="state-container" id="state-result">
+      <!-- Status Badge Container -->
+      <div class="result-badge-container">
+        <div class="status-badge" id="result-status-badge">
+          <span class="status-indicator-dot"></span>
+          <span id="result-status-text">Supported by Evidence</span>
+        </div>
+      </div>
+
+      <!-- Scrollable Report Details -->
+      <div class="report-scroll">
+        <!-- Summary Card -->
+        <div class="card">
+          <h4>Summary</h4>
+          <p id="result-summary">...</p>
+        </div>
+
+        <!-- Facts / What Actually Happened -->
+        <div class="card">
+          <h4>What Actually Happened</h4>
+          <p id="result-evidence">...</p>
+        </div>
+
+        <!-- Evidence Quality Layer -->
+        <div class="card trust-card">
+          <div class="trust-header">
+            <h4>Evidence Quality</h4>
+            <span class="trust-badge" id="result-trust-level">High</span>
+          </div>
+          <p class="trust-reason" id="result-trust-reason">Supported by multiple Tier 1 sources.</p>
+        </div>
+
+        <!-- Media Origin (Conditional) -->
+        <div class="card" id="card-media-origin">
+          <h4>Media Origin</h4>
+          <p id="result-media-origin">...</p>
+        </div>
+
+        <!-- Trusted Sources List -->
+        <div class="sources-section">
+          <h5>Trusted Sources</h5>
+          <ul class="links-list" id="result-sources">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+
+        <!-- Related Articles List -->
+        <div class="sources-section">
+          <h5>Related Articles</h5>
+          <ul class="links-list" id="result-related">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <footer class="action-footer">
+        <button class="btn btn-secondary" id="btn-save-report">
+          <span class="icon">💾</span> Save Report
+        </button>
+      </footer>
+    </div>
+
+    <!-- State 4: Error/Timeout View -->
+    <div class="state-container" id="state-error">
+      <div class="error-graphic">⚠️</div>
+      <h3 id="error-title">Verification Failed</h3>
+      <p class="error-text" id="error-message">
+        We encountered an error connecting to the TruthLens backend service worker. Please verify the API server is online.
+      </p>
+      <button class="btn btn-primary" id="btn-error-retry">Retry Verification</button>
+    </div>
+  </main>
+
+  <script src="search_provider.js"></script>
+  <script src="llm_provider.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>
